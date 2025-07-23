@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree of Life Children's Home - Rusinga Island</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #2e7d32; /* Green theme */
+            --secondary-color: #1b5e20;
+            --accent-color: #ffab00;
+            --text-color: #263238;
+            --light-color: #f9fafb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            height: 40px;
+            transition: var(--transition);
+        }
+
+        .navbar-logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .navbar-item {
+            position: relative;
+        }
+
+        .navbar-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .navbar-link:hover::after,
+        .navbar-link.active::after {
+            width: 100%;
+        }
+
+        .navbar-link:hover,
+        .navbar-link.active {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Menu Toggle */
+        .navbar-toggle {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 21px;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1001;
+        }
+
+        .bar {
+            height: 3px;
+            width: 100%;
+            background-color: var(--text-color);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideUp 1.2s ease-out;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+            margin-left: 1rem;
+        }
+
+        .btn-accent:hover {
+            background: #ff8f00;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            animation: slideLeft 1s ease-out;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            animation: slideRight 1s ease-out;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideRight {
+            from { 
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Mobile Menu Styles */
+        @media screen and (max-width: 768px) {
+            .navbar-container {
+                padding: 1rem;
+            }
+            
+            .navbar-toggle {
+                display: flex;
+            }
+            
+            .navbar-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.5s ease-in-out;
+                padding: 2rem;
+                gap: 2.5rem;
+            }
+            
+            .navbar-menu.active {
+                right: 0;
+            }
+            
+            /* Animate toggle to X */
+            .navbar-toggle.active .bar:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            
+            .navbar-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .navbar-toggle.active .bar:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+            
+            /* Overlay effect */
+            .navbar-menu::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: -1;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                pointer-events: none;
+            }
+            
+            .navbar-menu.active::before {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* Hero adjustments */
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                margin: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">
+                <img src="https://via.placeholder.com/150x50?text=Tree+of+Life" alt="Tree of Life Logo">
+            </a>
+            
+            <div class="navbar-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link active">Home</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">About</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">Our Children</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">Programs</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">Contact</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="btn" style="color: white;">Donate</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Tree of Life Children's Home</h1>
+            <p>Nestled on the serene shores of Rusinga Island, Tree of Life Children's Home is a sanctuary of hope, love, and opportunity for vulnerable children. Our mission is to provide a safe, nurturing, and family-like environment where every child can grow, learn, and thrive.</p>
+            <div class="btn-container">
+                <a href="#" class="btn">Learn More</a>
+                <a href="#" class="btn btn-accent">Donate Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2 class="section-title">Our Mission</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>At Tree of Life, we believe that every child deserves a chance to flourish—rooted in care, education, and community support. Through holistic care, quality education, and sustainable programs, we empower children to build brighter futures and become positive contributors to society.</p>
+                <p>Join us in planting seeds of change and helping children rise strong—because every child deserves a place to call home.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Children at Tree of Life">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            
+            // Toggle mobile menu
+            mobileMenu.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                navbarMenu.classList.toggle('active');
+                
+                // Toggle body scroll when menu is open
+                if (navbarMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Close menu when clicking on a link
+            const navbarLinks = document.querySelectorAll('.navbar-link');
+            navbarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    navbarMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            // Add scroll effect to navbar
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 10) {
+                    navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+                    navbar.style.padding = '0.5rem 0';
+                } else {
+                    navbar.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+                    navbar.style.padding = '1rem 0';
+                }
+            });
+
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.about-text, .about-image');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateX(0)';
+                    }
+                });
+            };
+
+            // Initialize elements as invisible
+            document.querySelectorAll('.about-text, .about-image').forEach(el => {
+                el.style.opacity = '0';
+            });
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+        });
+    </script>
+</body>
+</html>
