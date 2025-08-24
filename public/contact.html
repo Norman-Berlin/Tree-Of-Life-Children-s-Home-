@@ -43,111 +43,158 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="section">
+   <!-- Contact Section -->
+    <section class="contact">
         <div class="container">
-            <div class="section-header">
-                <h2>Get In Touch</h2>
-                <div class="divider"></div>
-                <p>We're here to answer any questions you may have</p>
-            </div>
-            
+            <h2 class="section-title">Contact <span>Us</span></h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <div class="info-item">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <p>Tree of Life Children's Home<br>Rusinga Island, Lake Victoria<br>Kenya</p>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Rusinga Island, Kenya</p>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <p>+254 723 461 935</p>
-                    </div>
-                    <div class="info-item">
+                    <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <p>treeoflife823@yahoo.com</p>
+                        <div>
+                            <h4>Email</h4>
+                            <p>treeoflife823@yahoo.com</p>
+                        </div>
                     </div>
-                    
-                    <h3 style="margin-top: 40px;">Connect With Us</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+254 723 461 935</p>
+                        </div>
                     </div>
-                    
-                    <div class="map-container">
-<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d178.9013063546929!2d34.193418768470984!3d-0.3889032977572591!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2ske!4v1753261071005!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            </div>
+                    <div class="contact-social">
+                        <a href="https://web.facebook.com/profile.php?id=61559195197895"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/treeoflife_823"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/tree_of_life_823/?hl=en"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Me a Message</h3>
+                    <form action="https://formsubmit.co/berlinnorman24@gmail.com" method="POST">
+                        <!-- FormSubmit configuration -->
+                        <input type="hidden" name="_subject" value="New message from portfolio contact form">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="#">
+                        <input type="hidden" name="_captcha" value="false">
+                        
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="section team-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Team</h2>
-                <div class="divider"></div>
-                <p>The dedicated people who make Tree of Life possible</p>
-            </div>
+    <!-- Notification element -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Message sent successfully!</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.contact-form form');
+            const notification = document.getElementById('notification');
             
-            <div class="team-members">
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="senior.jpg" alt="Director">
-                    </div>
-                    <div class="member-info">
-                        <h4>Sam & Rebecca</h4>
-                        <p>Management Team</p>
-                        <div class="member-contact">
-                            <p><i class="fas fa-envelope"></i> james@treeoflife-rusinga.org</p>
-                            <p><i class="fas fa-phone"></i> +254 722 111 222</p>
-                        </div>
-                    </div>
-                </div>
+            form.addEventListener('submit', function(e) {
+                // Validate form before submission
+                const nameInput = form.querySelector('input[name="name"]');
+                const emailInput = form.querySelector('input[name="email"]');
+                const messageInput = form.querySelector('textarea[name="message"]');
                 
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="headteacher.jpg" alt="Program Coordinator">
-                    </div>
-                    <div class="member-info">
-                        <h4>Florence Akoth</h4>
-                        <p>Program Coordinator</p>
-                        <div class="member-contact">
-                            <p><i class="fas fa-envelope"></i> james@treeoflife-rusinga.org</p>
-                            <p><i class="fas fa-phone"></i> +254 722 333 444</p>
-                        </div>
-                    </div>
-                </div>
+                let isValid = true;
                 
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="team.jpg" alt="Volunteer Coordinator">
-                    </div>
-                    <div class="member-info">
-                        <h4>Andrew & Albert</h4>
-                        <p>Volunteer Coordinator</p>
-                        <div class="member-contact">
-                            <p><i class="fas fa-envelope"></i> andrew@treeoflife-rusinga.org</p>
-                            <p><i class="fas fa-phone"></i> +254 722 555 666</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="social worker2.jpg" alt="Director">
-                    </div>
-                    <div class="member-info">
-                        <h4>Jerry Omondi</h4>
-                        <p>Social worker</p>
-                        <div class="member-contact">
-                            <p><i class="fas fa-envelope"></i> jerry@treeoflife-rusinga.org</p>
-                            <p><i class="fas fa-phone"></i> +254 722 111 222</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                // Reset previous error states
+                nameInput.style.borderColor = '';
+                emailInput.style.borderColor = '';
+                messageInput.style.borderColor = '';
+                
+                // Validate name
+                if (!nameInput.value.trim()) {
+                    nameInput.style.borderColor = '#e74c3c';
+                    isValid = false;
+                }
+                
+                // Validate email
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailInput.value)) {
+                    emailInput.style.borderColor = '#e74c3c';
+                    isValid = false;
+                }
+                
+                // Validate message
+                if (!messageInput.value.trim()) {
+                    messageInput.style.borderColor = '#e74c3c';
+                    isValid = false;
+                }
+                
+                if (!isValid) {
+                    e.preventDefault();
+                    showNotification('Please fill all required fields correctly', true);
+                    return;
+                }
+                
+                // Show loading state
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                // FormSubmit will handle the actual submission
+                // We'll show a success message after a short delay
+                setTimeout(() => {
+                    showNotification('Message sent successfully!');
+                    form.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+            
+            function showNotification(message, isError = false) {
+                const icon = notification.querySelector('i');
+                const text = notification.querySelector('span');
+                
+                text.textContent = message;
+                notification.className = 'notification';
+                
+                if (isError) {
+                    notification.classList.add('error');
+                    icon.className = 'fas fa-exclamation-circle';
+                } else {
+                    notification.classList.remove('error');
+                    icon.className = 'fas fa-check-circle';
+                }
+                
+                notification.classList.add('show');
+                
+                // Hide notification after 5 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 5000);
+            }
+        });
+    </script>
+
 
     <!-- FAQ Section -->
     <section class="section">
